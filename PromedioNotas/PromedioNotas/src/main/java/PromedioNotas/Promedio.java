@@ -20,20 +20,23 @@ public class Promedio {
         // TODO code application logic here
         Scanner teclado= new Scanner(System.in);
 
-        int [] prome;
-        prome= new int[20];
+        // se define un vector llamado prome
+        int [] prome =new int[20];//se define el tamaño de prome
 
-        int i;
-        float total=0;
-        for(i=0;i<20;++i)
+        int i = 0;//(declaración subinidce del recorrido del vector)contador
+        float total=0;//declaración de la variable que contendra el promedio de notas (acumulador)
+        for(i=0;i<20;++i)//ciclo for que recorre desde cero hasta que sea menor a 20
+        //recorrido del vector para la asignación de calificaciones o notas
         {
             System.out.print("ingrese calificacion del alumno "+i+": ");
-            prome[i]=teclado.nextInt();
-           total=total+prome[i];
+            prome[i]=teclado.nextInt(); //prome en la posición i va a ser lo que se digitara
+           total=total+prome[i]; //se acumula en la variable total 
         }
-        System.out.println("total es: "+total);
-        total= total/20;
+        //Despliegue del promedio de notas o calificaciones
+        System.out.println("La suma de las notas es: "+total);
+        total= total/20;//sacando promedio
         System.out.println("promedio general es: "+total);
+        //Despliegue de notas por alumno ingresado del último al primero
         for(i=19;i>=0;--i)
             System.out.println("alumno "+i+" su promedio es: "+prome[i]);  
     }        
