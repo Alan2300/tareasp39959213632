@@ -60,36 +60,36 @@ public class clsUsuario {
     public String toString() {
         return "clsUsuario{" + "IdUsuario=" + IdUsuario + ", NombreUsuario=" + NombreUsuario + ", ContrasenaUsuario=" + ContrasenaUsuario + '}';
     }
-    public clsUsuario getInformacionUsuario(clsUsuario usuario)
+    //Metodos de acceso a la capa controlador
+    public clsUsuario getBuscarInformacionUsuarioPorNombre(clsUsuario usuario)
     {
         daoUsuario daousuario = new daoUsuario();
-        usuario = daousuario.query(usuario);
-        return usuario;
+        return daousuario.consultaUsuariosPorNombre(usuario);
     }
+    public clsUsuario getBuscarInformacionUsuarioPorId(clsUsuario usuario)
+    {
+        daoUsuario daousuario = new daoUsuario();
+        return daousuario.consultaUsuariosPorId(usuario);
+    }    
     public List<clsUsuario> getListadoUsuarios()
     {
         daoUsuario daousuario = new daoUsuario();
-        List<clsUsuario> listadoUsuarios = daousuario.select();
+        List<clsUsuario> listadoUsuarios = daousuario.consultaUsuarios();
         return listadoUsuarios;
     }
     public int setBorrarUsuario(clsUsuario usuario)
     {
         daoUsuario daousuario = new daoUsuario();
-        return daousuario.delete(usuario);
+        return daousuario.borrarUsuarios(usuario);
     }          
     public int setIngresarUsuario(clsUsuario usuario)
     {
         daoUsuario daousuario = new daoUsuario();
-        return daousuario.insert(usuario);
+        return daousuario.ingresaUsuarios(usuario);
     }              
-    public clsUsuario getBuscarUsuario(clsUsuario usuario)
-    {
-        daoUsuario daousuario = new daoUsuario();
-        return daousuario.query(usuario);
-    }                  
     public int setModificarUsuario(clsUsuario usuario)
     {
         daoUsuario daousuario = new daoUsuario();
-        return daousuario.update(usuario);
+        return daousuario.actualizaUsuarios(usuario);
     }              
 }
