@@ -1,0 +1,59 @@
+commit 0a78e58dfbfa43f15f54f74dde32a2f5a434888b
+Author: Alan Galicia <agaliciar4@miumg.edu.gt>
+Date:   Mon Mar 6 13:03:08 2023 -0600
+
+    subiendo empleados completo y funcionando
+
+commit 5f15ed55962006993303065a0e09c00e901b4c80
+Author: Alan Galicia <agaliciar4@miumg.edu.gt>
+Date:   Mon Mar 6 12:28:27 2023 -0600
+
+    inicialización del proyecto 9959213632
+
+commit cda78a25beb4d842d9c73d6a90b9c13976f4d618
+Author: Alan Galicia <agaliciar4@miumg.edu.gt>
+Date:   Mon Feb 20 12:37:13 2023 -0600
+
+    subiendo proyectomvc con arreglos en la conexión
+
+commit d63d204fd76cdba9163ac16e40b43005569fe953
+Author: Alan Galicia <agaliciar4@miumg.edu.gt>
+Date:   Mon Feb 13 16:11:09 2023 -0600
+
+    subiendo proyectomvc con conexion exitosa
+
+commit 3dd6dffd35f45b58c5227f7c417bb4883329e17c
+Author: Alan Galicia <agaliciar4@miumg.edu.gt>
+Date:   Mon Feb 6 12:28:35 2023 -0600
+
+    Subiendo programa de la clase del 6 de febrero
+
+commit 8900ba5b8efbda16871ffce62387bd17f5ec227e
+Author: Alan Galicia <agaliciar4@miumg.edu.gt>
+Date:   Wed Feb 1 12:12:59 2023 -0600
+
+    subiendo programas hechos en clase
+
+commit 29cce3de4217a420bc9bbe3e86839c1a9416d4d8
+Author: Alan Galicia <agaliciar4@miumg.edu.gt>
+Date:   Mon Jan 30 12:12:06 2023 -0600
+
+    subiendo arreglos a promedio
+
+commit b2b9bd10c0ab6a854b9827a30fc5aeb6ff0c1149
+Author: Alan Galicia <agaliciar4@miumg.edu.gt>
+Date:   Wed Jan 25 11:35:45 2023 -0600
+
+    subiendo el ignore
+
+commit 807b047d3a7ce478385473cf1f11efa960c2770b
+Author: Alan Galicia <agaliciar4@miumg.edu.gt>
+Date:   Wed Jan 25 10:48:32 2023 -0600
+
+    subiendo archivos primeros programas en java
+
+commit a49b5b9a63b68d40bf1e35c8619be6ea183b4dd2
+Author: Alan Galicia <97969544+Alan2300@users.noreply.github.com>
+Date:   Mon Jan 23 10:59:15 2023 -0600
+
+    Initial commit
