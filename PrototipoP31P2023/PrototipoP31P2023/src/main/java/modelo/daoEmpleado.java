@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import controlador.clsAplicacion;
+import controlador.clsEmpleado;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,34 +14,34 @@ import java.util.List;
  *
  * @author visitante
  */
-public class daoAplicacion {
+public class daoEmpleado {
 
-    private static final String SQL_SELECT = "SELECT aplid, aplnombre, aplestatus FROM tbl_aplicaciones";
-    private static final String SQL_INSERT = "INSERT INTO tbl_aplicaciones(aplnombre, aplestatus) VALUES(?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_aplicaciones SET aplnombre=?, aplestatus=? WHERE aplid = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_aplicaciones WHERE aplid=?";
-    private static final String SQL_SELECT_NOMBRE = "SELECT aplid, aplnombre, aplestatus FROM tbl_aplicaciones WHERE aplnombre = ?";
-    private static final String SQL_SELECT_ID = "SELECT aplid, aplnombre, aplestatus FROM tbl_aplicaciones WHERE aplid = ?";    
+    private static final String SQL_SELECT = "SELECT codigo_empleado, nombre_empleado, estatus_empleado FROM empleado";
+    private static final String SQL_INSERT = "INSERT INTO empleado(nombre_empleado, estatus_empleado) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE empleado SET nombre_empleado=?, estatus_empleado=? WHERE codigo_empleado = ?";
+    private static final String SQL_DELETE = "DELETE FROM empleado WHERE codigo_empleado=?";
+    private static final String SQL_SELECT_NOMBRE = "SELECT codigo_empleado, nombre_empleado, estatus_empleado FROM empleado WHERE nombre_empleado = ?";
+    private static final String SQL_SELECT_ID = "SELECT codigo_empleado, nombre_empleado, estatus_empleado FROM empleado WHERE codigo_empleado = ?";    
 
-    public List<clsAplicacion> consultaAplicaciones() {
+    public List<clsEmpleado> consultaEmpleados() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        List<clsAplicacion> aplicaciones = new ArrayList<>();
+        List<clsEmpleado> empleados = new ArrayList<>();
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int idAp = rs.getInt("aplid");
-                String nombreAp = rs.getString("aplnombre");
-                String estatus = rs.getString("aplestatus");
-                clsAplicacion aplicacion = new clsAplicacion();
-                aplicacion.setIdAplicacion(idAp);
-                aplicacion.setNombreAplicacion(nombreAp);
-                aplicacion.setEstatusAplicacion(estatus);
-                aplicaciones.add(aplicacion);
+                int codigo = rs.getInt("codigo_empleado");
+                String nombre = rs.getString("nombre_empleado");
+                String estatus = rs.getString("estatus_empleado");
+                clsEmpleado empleado = new clsEmpleado();
+                empleado.setCodigoEmpleado(codigo);
+                empleado.setNombreEmpleado(nombre);
+                empleado.setEstatusEmpleado(estatus);
+                empleados.add(empleado);
             }
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -50,18 +50,18 @@ public class daoAplicacion {
             Conexion.close(stmt);
             Conexion.close(conn);
         }
-        return aplicaciones;
+        return empleados;
     }
 
-    public int ingresarAplicaciones(clsAplicacion aplicacion) {
+    public int ingresaUsuarios(clsEmpleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1, aplicacion.getNombreAplicacion());
-            stmt.setString(2, aplicacion.getEstatusAplicacion());
+            stmt.setString(1, empleado.getNombreEmpleado());
+            stmt.setString(2, empleado.getEstatusEmpleado());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -76,7 +76,7 @@ public class daoAplicacion {
         return rows;
     }
 
-    public int actualizaAplicaciones(clsAplicacion aplicacion) {
+    public int actualizaUsuarios(clsEmpleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -84,9 +84,9 @@ public class daoAplicacion {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, aplicacion.getNombreAplicacion());
-            stmt.setString(2, aplicacion.getEstatusAplicacion());
-            stmt.setInt(3, aplicacion.getIdAplicacion());
+            stmt.setString(1, empleado.getNombreEmpleado());
+            stmt.setString(2, empleado.getEstatusEmpleado());
+            stmt.setInt(3, empleado.getCodigoEmpleado());
 
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
@@ -101,7 +101,7 @@ public class daoAplicacion {
         return rows;
     }
 
-    public int borrarAplicaciones(clsAplicacion aplicacion) {
+    public int borrarUsuarios(clsEmpleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -110,7 +110,7 @@ public class daoAplicacion {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, aplicacion.getIdAplicacion());
+            stmt.setInt(1, empleado.getCodigoEmpleado());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -123,61 +123,27 @@ public class daoAplicacion {
         return rows;
     }
 
-    public clsAplicacion consultaAplicacionesPorNombre(clsAplicacion aplicacion) {
+    public clsEmpleado consultaUsuariosPorNombre(clsEmpleado empleado) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + aplicacion);
+            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + empleado);
             stmt = conn.prepareStatement(SQL_SELECT_NOMBRE);
             //stmt.setInt(1, usuario.getIdUsuario());            
-            stmt.setString(1, aplicacion.getNombreAplicacion());
+            stmt.setString(1, empleado.getNombreEmpleado());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int idAp = rs.getInt("aplid");
-                String nombreAp = rs.getString("aplnombre");
-                String estatus = rs.getString("aplestatus");
-
-                //usuario = new clsUsuario();
-                aplicacion.setIdAplicacion(idAp);
-                aplicacion.setNombreAplicacion(nombreAp);
-                aplicacion.setEstatusAplicacion(estatus);
-                System.out.println(" registro consultado: " + aplicacion);                
-            }
-            //System.out.println("Registros buscado:" + persona);
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-
-        //return personas;  // Si se utiliza un ArrayList
-        return aplicacion;
-    }
-    public clsAplicacion consultaAplicacionesPorId(clsAplicacion aplicacion) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + aplicacion);
-            stmt = conn.prepareStatement(SQL_SELECT_ID);
-            stmt.setInt(1, aplicacion.getIdAplicacion());            
-            //stmt.setString(1, usuario.getNombreUsuario());
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                int idAp = rs.getInt("usuid");
-                String nombreAp = rs.getString("usunombre");
+                int codigo = rs.getInt("usuid");
+                String nombre = rs.getString("usunombre");
                 String estatus = rs.getString("usucontrasena");
 
                 //usuario = new clsUsuario();
-                aplicacion.setIdAplicacion(idAp);
-                aplicacion.setNombreAplicacion(nombreAp);
-                aplicacion.setEstatusAplicacion(estatus);
-                System.out.println(" registro consultado: " + aplicacion);                
+                empleado.setCodigoEmpleado(codigo);
+                empleado.setNombreEmpleado(nombre);
+                empleado.setEstatusEmpleado(estatus);
+                System.out.println(" registro consultado: " + empleado);                
             }
             //System.out.println("Registros buscado:" + persona);
         } catch (SQLException ex) {
@@ -189,6 +155,39 @@ public class daoAplicacion {
         }
 
         //return personas;  // Si se utiliza un ArrayList
-        return aplicacion;
+        return empleado;
+    }
+    public clsEmpleado consultaUsuariosPorId(clsEmpleado empleado) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = Conexion.getConnection();
+            System.out.println("Ejecutando query:" + SQL_SELECT_NOMBRE + " objeto recibido: " + empleado);
+            stmt = conn.prepareStatement(SQL_SELECT_ID);
+            stmt.setInt(1, empleado.getCodigoEmpleado());            
+            //stmt.setString(1, usuario.getNombreUsuario());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int codigo = rs.getInt("usuid");
+                String nombre = rs.getString("usunombre");
+                String estatus = rs.getString("usucontrasena");
+
+                //usuario = new clsUsuario();
+                empleado.setCodigoEmpleado(codigo);
+                empleado.setNombreEmpleado(nombre);
+                empleado.setEstatusEmpleado(estatus);                
+            }
+            //System.out.println("Registros buscado:" + persona);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        //return personas;  // Si se utiliza un ArrayList
+        return empleado;
     }    
 }

@@ -6,7 +6,7 @@
 package vista;
 
 
-import controlador.clsAplicacion;
+import controlador.clsEmpleado;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author visitante
  */
-public class frmMantenimientoAplicacion extends javax.swing.JInternalFrame {
+public class frmMantenimientoEmpleado extends javax.swing.JInternalFrame {
 
     public void llenadoDeCombos() {
         /*EmpleadoDAO empleadoDAO = new EmpleadoDAO();
@@ -31,23 +31,23 @@ public class frmMantenimientoAplicacion extends javax.swing.JInternalFrame {
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID");
+        modelo.addColumn("codigo");
         modelo.addColumn("nombre");
         modelo.addColumn("Estatus");
-        clsAplicacion aplicacion = new clsAplicacion();
+        clsEmpleado aplicacion = new clsEmpleado();
         //VendedorDAO vendedorDAO = new VendedorDAO();
-        List<clsAplicacion> listaAplicaciones = aplicacion.getListadoAplicaciones();
+        List<clsEmpleado> listaAplicaciones = aplicacion.getListadoUsuarios();
         tablaAplicaciones.setModel(modelo);
         String[] dato = new String[3];
         for (int i = 0; i < listaAplicaciones.size(); i++) {
-            dato[0] = Integer.toString(listaAplicaciones.get(i).getIdAplicacion());
-            dato[1] = listaAplicaciones.get(i).getNombreAplicacion();
-            dato[2] = listaAplicaciones.get(i).getEstatusAplicacion();
+            dato[0] = Integer.toString(listaAplicaciones.get(i).getCodigoEmpleado());
+            dato[1] = listaAplicaciones.get(i).getNombreEmpleado();
+            dato[2] = listaAplicaciones.get(i).getEstatusEmpleado();
             modelo.addRow(dato);
         }       
     }
 
-    public frmMantenimientoAplicacion() {
+    public frmMantenimientoEmpleado() {
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
@@ -275,9 +275,9 @@ public class frmMantenimientoAplicacion extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         int registrosBorrados=0;
-        clsAplicacion aplicacion = new clsAplicacion();
-        aplicacion.setIdAplicacion(Integer.parseInt(txtbuscado.getText()));
-        registrosBorrados=aplicacion.setBorrarAplicacion(aplicacion);
+        clsEmpleado empleado = new clsEmpleado();
+        empleado.setCodigoEmpleado(Integer.parseInt(txtbuscado.getText()));
+        registrosBorrados=empleado.setBorrarUsuario(empleado);
         JOptionPane.showMessageDialog(null, "Registro Borrado\n", 
                     "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
         llenadoDeTablas();
@@ -285,10 +285,10 @@ public class frmMantenimientoAplicacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        clsAplicacion aplicacion = new clsAplicacion();
-        aplicacion.setNombreAplicacion(txtNombre.getText());
-        aplicacion.setEstatusAplicacion(txtContrasena.getText());
-        aplicacion.setIngresarAplicacion(aplicacion);
+        clsEmpleado empleado = new clsEmpleado();
+        empleado.setNombreEmpleado(txtNombre.getText());
+        empleado.setEstatusEmpleado(txtContrasena.getText());
+        empleado.setIngresarUsuario(empleado);
         JOptionPane.showMessageDialog(null, "Registro Ingresado\n", 
                     "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);
         llenadoDeTablas();
@@ -297,22 +297,22 @@ public class frmMantenimientoAplicacion extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        clsAplicacion aplicacion = new clsAplicacion();
+        clsEmpleado empleado = new clsEmpleado();
         //usuario.setNombreUsuario(txtbuscado.getText());        
-        aplicacion.setIdAplicacion(Integer.parseInt(txtbuscado.getText()));        
-        aplicacion = aplicacion.getBuscarInformacionAplicacionPorId(aplicacion);
-        System.out.println("Usuario retornado:" + aplicacion);        
-        txtNombre.setText(aplicacion.getNombreAplicacion());
-        txtContrasena.setText(aplicacion.getEstatusAplicacion());
+        empleado.setCodigoEmpleado(Integer.parseInt(txtbuscado.getText()));        
+        empleado = empleado.getBuscarInformacionUsuarioPorId(empleado);
+        System.out.println("Usuario retornado:" + empleado);        
+        txtNombre.setText(empleado.getNombreEmpleado());
+        txtContrasena.setText(empleado.getEstatusEmpleado());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
-        clsAplicacion aplicacion = new clsAplicacion();
-        aplicacion.setIdAplicacion(Integer.parseInt(txtbuscado.getText()));
-        aplicacion.setNombreAplicacion(txtNombre.getText());
-        aplicacion.setEstatusAplicacion(txtContrasena.getText());
-        aplicacion.setModificarAplicacion(aplicacion);
+        clsEmpleado empleado = new clsEmpleado();
+        empleado.setCodigoEmpleado(Integer.parseInt(txtbuscado.getText()));
+        empleado.setNombreEmpleado(txtNombre.getText());
+        empleado.setEstatusEmpleado(txtContrasena.getText());
+        empleado.setModificarUsuario(empleado);
         JOptionPane.showMessageDialog(null, "Registro Modificado\n", 
                     "Información del Sistema", JOptionPane.INFORMATION_MESSAGE);        
         llenadoDeTablas();

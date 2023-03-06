@@ -5,8 +5,7 @@
  */
 package vista;
 
-import controlador.clsUsuario;
-import controlador.clsAplicacion;
+import controlador.clsEmpleado;
 import java.awt.HeadlessException;
 
 import javax.swing.JOptionPane;
@@ -128,36 +127,12 @@ public class frmLogin extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
 
-        if (txtUsuario.getText().trim().isEmpty() || txtContraseña.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "NO PUEDEN HABER CAMPOS VACIOS", "ERROR", JOptionPane.                  ERROR_MESSAGE);
-        } else {
-            try {
-                clsUsuario usuario = new clsUsuario();
-                clsAplicacion aplicacion = new clsAplicacion();
-          
-                usuario.setNombreUsuario(txtUsuario.getText().trim());
-                // Recuperación de información a través de otro objeto
-                usuario = usuario.getBuscarInformacionUsuarioPorNombre(usuario);
-                if (txtContraseña.getText().equals(usuario.getContrasenaUsuario()) && 
-                    txtUsuario.getText().equals(usuario.getNombreUsuario())) {
-                    JOptionPane.showMessageDialog(null, "Bienvenido al SISTEMA\n", 
-                    "Mensaje de bienvenida", JOptionPane.INFORMATION_MESSAGE);
+       
 
                     MdiGeneral menuGeneral = new MdiGeneral();
                     menuGeneral.setVisible(true);
                     this.dispose();
 
-                } else {
-                    JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO o CONTRASEÑA",                              "ERROR", JOptionPane.ERROR_MESSAGE);
-                    txtContraseña.setText("");
-                    txtUsuario.setText("");
-                }
-            } catch (HeadlessException e) {
-                JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO o CONTRASEÑA", "ERROR",                     JOptionPane.ERROR_MESSAGE);
-                txtContraseña.setText("");
-                txtUsuario.setText("");
-            }
-        }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 
